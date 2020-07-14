@@ -74,6 +74,7 @@ class ZboziFeedItemFacade
     public function getItems(DomainConfig $domainConfig, ?int $lastSeekId, int $maxResults): iterable
     {
         $pricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainConfig->getId());
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Product[] $products */
         $products = $this->zboziProductRepository->getProducts($domainConfig, $pricingGroup, $lastSeekId, $maxResults);
         $this->productUrlsBatchLoader->loadForProducts($products, $domainConfig);
         $this->productParametersBatchLoader->loadForProducts($products, $domainConfig);
